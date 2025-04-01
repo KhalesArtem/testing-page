@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Симфоническое приветствие</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            overflow: hidden;
+        }
+        .container {
+            text-align: center;
+            max-width: 800px;
+            padding: 2rem;
+            background-color: rgba(0, 0, 0, 0.5);
+            border-radius: 15px;
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+        }
+        p {
+            font-size: 1.5rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+        .music-note {
+            position: absolute;
+            font-size: 2rem;
+            opacity: 0;
+            animation: notes 4s linear infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        @keyframes notes {
+            0% { transform: translate(0, 0); opacity: 0; }
+            50% { opacity: 0.8; }
+            100% { transform: translate(var(--tx), var(--ty)); opacity: 0; }
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(45deg, #fdbb2d, #b21f1f);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Добро пожаловать</h1>
+        <p>Приглашаем вас насладиться симфонией великолепного опыта и гармонией безграничных возможностей.</p>
+        <a href="#" class="btn">Начать путешествие</a>
+    </div>
+
+    <script>
+        // Create musical notes floating animation
+        function createNotes() {
+            const notes = ['♩', '♪', '♫', '♬', '𝄞'];
+            const container = document.querySelector('body');
+            
+            for (let i = 0; i < 15; i++) {
+                const note = document.createElement('div');
+                note.className = 'music-note';
+                note.textContent = notes[Math.floor(Math.random() * notes.length)];
+                
+                // Random positions and movement
+                const x = Math.random() * window.innerWidth;
+                const y = Math.random() * window.innerHeight;
+                const tx = (Math.random() - 0.5) * 200;
+                const ty = -Math.random() * 300;
+                
+                note.style.left = `${x}px`;
+                note.style.top = `${y}px`;
+                note.style.setProperty('--tx', `${tx}px`);
+                note.style.setProperty('--ty', `${ty}px`);
+                
+                // Random delay and duration
+                note.style.animationDelay = `${Math.random() * 5}s`;
+                note.style.animationDuration = `${4 + Math.random() * 6}s`;
+                
+                container.appendChild(note);
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', createNotes);
+    </script>
+</body>
+</html>
